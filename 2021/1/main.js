@@ -8,7 +8,16 @@ for (let i = 0; i < inputArray.length; i++) {
   let currentDepth = inputArray[i]
   let previousDepth = inputArray[i - 1]
 
-  if (currentDepth > previousDepth) {
+  let window1 = inputArray[i] + inputArray[i + 1] + inputArray[i + 2]
+  let window2 = inputArray[i + 1] + inputArray[i + 2] + inputArray[i + 3]
+
+  // Part 1
+  //if (currentDepth > previousDepth) {
+  //  depthCount++
+  //}
+
+  // Part 2
+  if (window2 > window1) {
     depthCount++
   }
 }
