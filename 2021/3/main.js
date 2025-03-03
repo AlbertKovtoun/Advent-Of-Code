@@ -44,4 +44,47 @@ const gammaRate = parseInt(gammaRateBinary, 2)
 const epsilonRate = parseInt(epsilonRateBinary, 2)
 const powerConsumption = gammaRate * epsilonRate
 
-console.log(powerConsumption)
+//console.log(powerConsumption)
+
+function findRating(array, useMostCommon) {
+  let iDigits = ""
+  let mostCommonI = ""
+  let modArray = [...array]
+  let index = 0
+
+  while (modArray.length > 1) {
+    for (let i = 0; i < modArray.length; i++) {
+      iDigits += modArray[i].charAt(index)
+    }
+
+    let binaryCount = 0
+
+    for (let number of iDigits) {
+      if (number === "1") {
+        binaryCount++
+      } else {
+        binaryCount--
+      }
+    }
+
+    if (useMostCommon) {
+      binaryCount >= 0 ? (mostCommonI = "1") : (mostCommonI = "0")
+    } else {
+      binaryCount >= 0 ? (mostCommonI = "0") : (mostCommonI = "1")
+    }
+
+    modArray = modArray.filter((number) => number.charAt(index) === mostCommonI)
+
+    iDigits = ""
+    mostCommonI = ""
+
+    index++
+  }
+
+  return modArray[0]
+}
+
+const oxygenGeneratorRating = parseInt(findRating(inputArray, true), 2)
+const co2ScrubberRating = parseInt(findRating(inputArray, false), 2)
+
+console.log(oxygenGeneratorRating * co2ScrubberRating)
